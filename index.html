@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adam Simon | Future Criminal Defense Attorney</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23A41E35'/%3E%3Ctext x='50' y='50' font-size='60' text-anchor='middle' dominant-baseline='central' fill='white' font-family='Arial, sans-serif' font-weight='bold'%3EAS%3C/text%3E%3C/svg%3E">
     <style>
         * {
             margin: 0;
@@ -16,6 +17,14 @@
             line-height: 1.6;
             color: #1a1a1a;
             background: #ffffff;
+            opacity: 0;
+            animation: pageLoad 0.5s ease forwards;
+        }
+        
+        @keyframes pageLoad {
+            to {
+                opacity: 1;
+            }
         }
         
         /* Hero Section */
@@ -109,6 +118,37 @@
             background: rgba(255, 255, 255, 0.1);
         }
         
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #A41E35;
+            color: #ffffff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5em;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(164, 30, 53, 0.4);
+        }
+        
         /* Fade in on scroll */
         .fade-in {
             opacity: 0;
@@ -153,6 +193,19 @@
             opacity: 0.7;
         }
         
+        /* Temple Logo Link */
+        .temple-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .temple-icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+        
         /* Stats Section */
         .stats {
             display: flex;
@@ -164,6 +217,12 @@
         
         .stat-item {
             text-align: center;
+            transition: transform 0.3s ease;
+            cursor: default;
+        }
+        
+        .stat-item:hover .stat-number {
+            transform: scale(1.1);
         }
         
         .stat-number {
@@ -171,6 +230,7 @@
             font-weight: 700;
             color: #A41E35;
             margin-bottom: 10px;
+            transition: transform 0.3s ease;
         }
         
         .stat-label {
@@ -320,6 +380,65 @@
             transform: translateY(-2px);
         }
         
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Download Notification */
+        .download-notification {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        
+        .download-notification.show {
+            opacity: 1;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Contact Section */
         .contact-section {
             background: #1a1a1a;
@@ -368,6 +487,29 @@
             fill: currentColor;
         }
         
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: #999;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9em;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        footer a {
+            color: #A41E35;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        footer a:hover {
+            opacity: 0.7;
+        }
+        
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .hero {
@@ -391,6 +533,13 @@
             .secondary-button {
                 width: 100%;
                 max-width: 300px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
             }
             
             .section {
@@ -434,26 +583,40 @@
                 max-width: 300px;
                 justify-content: center;
             }
+            
+            .download-notification {
+                right: 20px;
+                bottom: 80px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+    
+    <!-- Download Notification -->
+    <div class="download-notification" id="downloadNotification">
+        Resume downloaded successfully!
+    </div>
+    
     <!-- Hero Section -->
-    <div class="hero">
+    <div class="hero" id="top">
         <canvas id="particles-canvas"></canvas>
         <div class="hero-content">
             <h1>Adam Simon</h1>
             <h2>Future Criminal Defense Attorney</h2>
             <div class="hero-buttons">
                 <a href="#contact" class="cta-button">Get In Touch</a>
-<a href="/Adam_Simon_Resume_01_31_26__1_.pdf" download class="secondary-button">Download Resume</a>            </div>
+                <a href="/Adam_Simon_Resume_01_31_26__1_.pdf" download class="secondary-button" id="resumeDownload">Download Resume</a>
+            </div>
         </div>
     </div>
     
     <!-- About Section -->
     <div class="section fade-in">
         <h3>About</h3>
-        <p>I'm a sophomore at <a href="https://www.temple.edu/" target="_blank">Temple University</a>'s <a href="https://www.fox.temple.edu/" target="_blank">Fox School of Business</a>, studying finance while preparing for law school. My goal is clear: become a criminal defense attorney who fights for clients with the same intensity I bring to everything I do.</p>
+        <p>I'm a sophomore at <a href="https://www.temple.edu/" target="_blank" class="temple-link"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23A41E35' d='M50 5L15 25v15h70V25L50 5zm0 40L15 65v10h70V65L50 45zm-25 35h50v10H25V80z'/%3E%3C/svg%3E" alt="Temple" class="temple-icon">Temple University</a>'s <a href="https://www.fox.temple.edu/" target="_blank">Fox School of Business</a>, studying finance while preparing for law school. My goal is clear: become a criminal defense attorney who fights for clients with the same intensity I bring to everything I do.</p>
         
         <div class="stats fade-in">
             <div class="stat-item">
@@ -502,8 +665,12 @@
             </a>
         </div>
         
-<form class="contact-form" action="https://formspree.io/f/mjgewgpq" method="POST">
-    <div class="form-group">
+        <div class="success-message" id="successMessage">
+            Message sent successfully! I'll get back to you soon.
+        </div>
+        
+        <form class="contact-form" action="https://formspree.io/f/mjgewgpq" method="POST" id="contactForm">
+            <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
@@ -521,6 +688,12 @@
             <button type="submit" class="submit-button">Send Message</button>
         </form>
     </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Adam Simon. All rights reserved.</p>
+        <p><a href="#top">Back to Top</a> • <a href="mailto:adamsimon2006@icloud.com">Contact</a></p>
+    </footer>
     
     <script>
         // Animated particles
@@ -598,6 +771,43 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = document.querySelector('.hero').offsetHeight;
+        });
+        
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // Download notification
+        const resumeDownload = document.getElementById('resumeDownload');
+        const downloadNotification = document.getElementById('downloadNotification');
+        
+        resumeDownload.addEventListener('click', () => {
+            downloadNotification.classList.add('show');
+            setTimeout(() => {
+                downloadNotification.classList.remove('show');
+            }, 3000);
+        });
+        
+        // Form success message
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        contactForm.addEventListener('submit', (e) => {
+            // Let formspree handle the submission
+            setTimeout(() => {
+                successMessage.classList.add('show');
+                contactForm.reset();
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+            }, 1000);
         });
         
         // Fade in on scroll
