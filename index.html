@@ -184,17 +184,12 @@
         
         /* Education Badge */
         .education {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
             margin-top: 40px;
-            padding: 30px;
+            padding: 40px;
             background: #f8f8f8;
             border-radius: 8px;
             border-left: 4px solid #A41E35;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
         }
         
         .education:hover {
@@ -202,32 +197,65 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         
-        .education img {
-            width: 80px;
-            height: 80px;
+        .education-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
         }
         
-        .education-text h4 {
-            font-size: 1.3em;
-            margin-bottom: 5px;
+        .education-header h4 {
+            font-size: 1.4em;
             color: #1a1a1a;
         }
         
-        .education-text p {
-            font-size: 1em;
-            color: #666;
-            margin: 0;
-        }
-        
-        .education-text .achievement {
-            display: inline-block;
+        .education-header .badge {
             background: #A41E35;
             color: #ffffff;
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 4px;
-            font-size: 0.85em;
-            margin-top: 8px;
-            font-weight: 500;
+            font-size: 0.75em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .education p {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            margin-top: 20px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            color: #666;
+        }
+        
+        .progress-bar-bg {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #A41E35 0%, #c92a44 100%);
+            border-radius: 6px;
+            width: 0%;
+            transition: width 2s ease;
+        }
+        
+        .progress-bar-fill.animate {
+            width: 38.33%;
         }
         
         /* Contact Section */
@@ -312,8 +340,13 @@
             }
             
             .education {
+                padding: 30px 25px;
+            }
+            
+            .education-header {
                 flex-direction: column;
-                text-align: center;
+                align-items: flex-start;
+                gap: 10px;
             }
             
             .contact-links {
@@ -348,10 +381,6 @@
         
         <div class="stats fade-in">
             <div class="stat-item">
-                <div class="stat-number" data-target="2028">0</div>
-                <div class="stat-label">Law School</div>
-            </div>
-            <div class="stat-item">
                 <div class="stat-number" data-target="46">0</div>
                 <div class="stat-label">Credits Earned</div>
                 <div class="stat-sublabel">of 120</div>
@@ -359,11 +388,20 @@
         </div>
         
         <div class="education fade-in">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Temple_T_logo.svg/1200px-Temple_T_logo.svg.png" alt="Temple University">
-            <div class="education-text">
+            <div class="education-header">
                 <h4>Temple University</h4>
-                <p>Fox School of Business • Finance</p>
-                <span class="achievement">Dean's List</span>
+                <span class="badge">DEAN'S LIST</span>
+            </div>
+            <p>Fox School of Business • Finance • Sophomore</p>
+            
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Undergraduate Progress</span>
+                    <span>Year 2 of 4</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -414,6 +452,8 @@
             if (hasAnimated) return;
             
             const statsSection = document.querySelector('.stats');
+            if (!statsSection) return;
+            
             const statsTop = statsSection.getBoundingClientRect().top;
             
             if (statsTop < window.innerHeight - 100) {
@@ -442,6 +482,28 @@
         
         window.addEventListener('scroll', animateCounters);
         window.addEventListener('load', animateCounters);
+        
+        // Progress bar animation
+        let progressAnimated = false;
+        
+        const animateProgressBar = () => {
+            if (progressAnimated) return;
+            
+            const progressBar = document.getElementById('progressBar');
+            const education = document.querySelector('.education');
+            
+            if (!education || !progressBar) return;
+            
+            const educationTop = education.getBoundingClientRect().top;
+            
+            if (educationTop < window.innerHeight - 100) {
+                progressAnimated = true;
+                progressBar.classList.add('animate');
+            }
+        };
+        
+        window.addEventListener('scroll', animateProgressBar);
+        window.addEventListener('load', animateProgressBar);
     </script>
 </body>
 </html>
