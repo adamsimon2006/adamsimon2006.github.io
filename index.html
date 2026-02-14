@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adam Simon | Law</title>
+    <title>Adam Simon | Future Criminal Defense Attorney</title>
     <style>
         * {
             margin: 0;
@@ -18,84 +18,157 @@
             background: #ffffff;
         }
         
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            padding: 120px 30px 100px;
+            text-align: center;
         }
         
-        h1 {
-            font-size: 3em;
+        .hero h1 {
+            font-size: 3.5em;
             font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
         }
         
-        h2 {
-            font-size: 1.3em;
+        .hero h2 {
+            font-size: 1.5em;
             font-weight: 400;
-            color: #666;
+            color: #e0e0e0;
             margin-bottom: 40px;
         }
         
-        p {
+        .hero p {
+            font-size: 1.2em;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #cccccc;
+            line-height: 1.8;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        /* Content Sections */
+        .section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 30px;
+        }
+        
+        .section h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+        
+        .section p {
             font-size: 1.1em;
             margin-bottom: 20px;
             color: #444;
+            line-height: 1.8;
         }
         
-        .contact {
+        /* Contact Section */
+        .contact-section {
+            background: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+        }
+        
+        .contact-section h3 {
+            color: #ffffff;
+        }
+        
+        .contact-section p {
+            color: #cccccc;
+        }
+        
+        .contact-links {
             margin-top: 40px;
-            padding-top: 40px;
-            border-top: 1px solid #e0e0e0;
         }
         
-        .contact a {
-            color: #1a1a1a;
+        .contact-links a {
+            display: inline-block;
+            color: #ffffff;
             text-decoration: none;
             font-weight: 500;
-            border-bottom: 2px solid #1a1a1a;
+            border-bottom: 2px solid #ffffff;
+            margin: 0 20px 15px;
+            padding: 5px 0;
             transition: opacity 0.2s;
-            margin-right: 20px;
         }
         
-        .contact a:hover {
-            opacity: 0.6;
+        .contact-links a:hover {
+            opacity: 0.7;
         }
         
-        @media (max-width: 600px) {
-            h1 {
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
                 font-size: 2.2em;
             }
-            h2 {
-                font-size: 1.1em;
+            
+            .hero h2 {
+                font-size: 1.2em;
             }
-            .contact a {
+            
+            .hero p {
+                font-size: 1em;
+            }
+            
+            .section {
+                padding: 60px 25px;
+            }
+            
+            .section h3 {
+                font-size: 1.6em;
+            }
+            
+            .contact-links a {
                 display: block;
-                margin-bottom: 10px;
+                margin: 15px 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
         <h1>Adam Simon</h1>
-        <h2>Future Law Student</h2>
-        
-        <p>
-            Sophomore at Temple University's Fox School of Business studying finance with a focus on law school preparation.
-        </p>
-        
-        <div class="contact">
-            <p>Currently accepting internship opportunities.</p>
-            <p>
-                <a href="mailto:adamsimon2006@icloud.com">adamsimon2006@icloud.com</a>
-                <a href="https://www.linkedin.com/in/adamrobelsimon" target="_blank">LinkedIn</a>
-            </p>
+        <h2>Future Criminal Defense Attorney</h2>
+        <p>Dedicated to protecting individual rights and ensuring every person receives a vigorous defense. Currently preparing for law school while building a foundation in finance and business strategy.</p>
+        <a href="mailto:adamsimon2006@icloud.com" class="cta-button">Get In Touch</a>
+    </div>
+    
+    <!-- About Section -->
+    <div class="section">
+        <h3>About</h3>
+        <p>I'm a sophomore at Temple University's Fox School of Business, studying finance while preparing for law school. My goal is clear: become a criminal defense attorney who fights for clients with the same intensity I bring to everything I do.</p>
+    </div>
+    
+    <!-- Contact Section -->
+    <div class="section contact-section">
+        <h3>Currently Seeking Opportunities</h3>
+        <p>I'm actively pursuing legal internships and opportunities to gain experience in litigation and criminal defense. If you're looking for someone who's disciplined, calculated, and committed to the work, let's connect.</p>
+        <div class="contact-links">
+            <a href="mailto:adamsimon2006@icloud.com">adamsimon2006@icloud.com</a>
+            <a href="https://www.linkedin.com/in/adamrobelsimon" target="_blank">LinkedIn</a>
         </div>
     </div>
 </body>
