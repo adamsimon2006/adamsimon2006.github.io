@@ -864,7 +864,7 @@
             <div class="typing-text" id="typingText"></div>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="/Adam_Simon_Resume_01_31_26__1_.pdf" download class="btn btn-secondary" id="resumeDownload">Download Resume</a>
+                <a href="Adam_Simon_Resume_01_31_26__1_.pdf" download class="btn btn-secondary" id="resumeDownload">Download Resume</a>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -980,7 +980,7 @@
             }, 1000);
         });
         
-        // Custom Cursor
+        // Custom Cursor - FASTER SPEED
         const cursor = document.getElementById('custom-cursor');
         let mouseX = 0, mouseY = 0;
         let cursorX = 0, cursorY = 0;
@@ -992,8 +992,8 @@
         });
         
         function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.15;
-            cursorY += (mouseY - cursorY) * 0.15;
+            cursorX += (mouseX - cursorX) * 0.5; // Changed from 0.15 to 0.5 for faster response
+            cursorY += (mouseY - cursorY) * 0.5;
             cursor.style.left = cursorX + 'px';
             cursor.style.top = cursorY + 'px';
             requestAnimationFrame(animateCursor);
@@ -1117,7 +1117,6 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-        
         // Sticky Nav
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => {
