@@ -41,43 +41,23 @@
             --text-dark: #1a1a1a;
         }
         
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background: #ffffff;
+            background: var(--bg-darker);
             overflow-x: hidden;
         }
         
         /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
-        }
-        
-        /* Custom Cursor */
-        body {
-            cursor: none;
-        }
-        
-        #custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.15s ease, opacity 0.15s ease;
-            opacity: 0;
-        }
-        
-        #custom-cursor.active {
-            opacity: 1;
-        }
-        
-        #custom-cursor.hover {
-            transform: scale(1.5);
-            background: rgba(164, 30, 53, 0.1);
         }
         
         /* Loading Screen */
@@ -172,6 +152,7 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
+            width: 100%;
             background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
             color: var(--text-light);
             display: flex;
@@ -316,6 +297,7 @@
             padding: 120px 40px;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
         }
         
         .section-title {
@@ -340,6 +322,10 @@
         }
         
         /* About Section */
+        #about {
+            background: #ffffff;
+        }
+        
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -534,6 +520,7 @@
             background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
             color: var(--text-light);
             padding: 120px 40px;
+            width: 100%;
         }
         
         .contact-content {
@@ -684,6 +671,7 @@
             color: var(--text-gray);
             text-align: center;
             padding: 40px 20px;
+            width: 100%;
         }
         
         footer p {
@@ -830,9 +818,6 @@
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div id="custom-cursor"></div>
-    
     <!-- Loading Screen -->
     <div id="loading-screen">
         <div class="loader"></div>
@@ -980,31 +965,6 @@
             }, 1000);
         });
         
-        // Custom Cursor - FASTER SPEED
-        const cursor = document.getElementById('custom-cursor');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.classList.add('active');
-        });
-        
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.5; // Changed from 0.15 to 0.5 for faster response
-            cursorY += (mouseY - cursorY) * 0.5;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-        
-        document.querySelectorAll('a, button').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-        
         // Typing Effect
         const typingText = document.getElementById('typingText');
         const texts = [
@@ -1117,6 +1077,7 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
+        
         // Sticky Nav
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => {
